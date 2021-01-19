@@ -10,7 +10,7 @@ import Combine
 
 final class MovieListHomeViewModel: ObservableObject {
     @Published var navTitle = ""
-    @Published var swapBtnImgName = HomeMode.list.icon()
+    @Published var swapBtnImgName = ""
     @Published var homeModel: HomeMode = HomeMode.list
     
     var cancellables = Set<AnyCancellable>()

@@ -20,6 +20,16 @@ struct MovieListHomeView: View {
         }
     }
     
+    private var settingButton: some View {
+        Button(action: {
+            
+        }) {
+            HStack {
+                Image(systemName: "wrench").imageScale(.medium)
+            }.frame(width: 30, height: 30)
+        }
+    }
+    
     var body: some View {
         Group {
             ListStyle()
@@ -28,6 +38,7 @@ struct MovieListHomeView: View {
         .navigationTitle(viewModel.navTitle)
         .navigationBarItems(trailing: HStack {
             swapHomeButton
+            settingButton
         })
     }
 }
