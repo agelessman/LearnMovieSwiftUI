@@ -12,6 +12,12 @@ final class MovieListHomeViewModel: ObservableObject {
     @Published var navTitle = ""
     @Published var swapBtnImgName = ""
     @Published var homeModel: HomeMode = HomeMode.list
+    @Published var selectedMenu: MoviesMenu = MoviesMenu.allCases.first!
+    
+    @Published var movies = [Movie]()
+    
+    
+    var page: Int = 1
     
     var cancellables = Set<AnyCancellable>()
     
@@ -19,6 +25,7 @@ final class MovieListHomeViewModel: ObservableObject {
         /// 更新mode切换
         $homeModel
             .throttle(for: 0.5, scheduler: RunLoop.main, latest: true)
+            .removeDuplicates()
             .map {
                 $0.icon()
             }
@@ -36,6 +43,23 @@ final class MovieListHomeViewModel: ObservableObject {
                 }
             }
             .assign(to: \.navTitle, on: self)
+            .store(in: &cancellables)
+        
+        /// 选中后请求数据
+        $selectedMenu
+            .flatMap {
+                APIService.fetch(endpoint: $0.endpoint(), params: ["page": "\(self.page)",
+                                                                   "region": AppUserDefaults.region])
+            }
+            .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
+            .map {
+                $0.results
+            }
+            .replaceError(with: [])
+            .scan([], {
+                $0 + $1
+            })
+            .assign(to: \.movies, on: self)
             .store(in: &cancellables)
     }
     

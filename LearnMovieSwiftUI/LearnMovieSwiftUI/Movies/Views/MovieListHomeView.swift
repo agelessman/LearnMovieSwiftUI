@@ -15,7 +15,8 @@ struct MovieListHomeView: View {
             viewModel.swapHomeMode()
         }) {
             HStack {
-                Image(systemName: viewModel.swapBtnImgName).imageScale(.medium)
+                Image(systemName: viewModel.swapBtnImgName)
+                    .imageScale(.medium)
             }.frame(width: 30, height: 30)
         }
     }
@@ -25,14 +26,16 @@ struct MovieListHomeView: View {
             
         }) {
             HStack {
-                Image(systemName: "wrench").imageScale(.medium)
+                Image(systemName: "wrench")
+                    .imageScale(.medium)
             }.frame(width: 30, height: 30)
         }
     }
     
     var body: some View {
         Group {
-            ListStyle()
+            MovieListView(movies: viewModel.movies,
+                          selectedMenu: $viewModel.selectedMenu)
         }
         .background(Color.green)
         .navigationTitle(viewModel.navTitle)
@@ -40,13 +43,6 @@ struct MovieListHomeView: View {
             swapHomeButton
             settingButton
         })
-    }
-}
-
-struct ListStyle: View {
-    var body: some View {
-        Text("ListStyle")
-//            .navigationTitle("00")
     }
 }
 

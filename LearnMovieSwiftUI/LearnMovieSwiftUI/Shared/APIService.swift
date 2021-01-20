@@ -77,8 +77,8 @@ public struct APIService {
     }
     
     /// 请求数据
-    static public func fetch<T: Codable>(endpoint: Endpoint,
-                                         params: [String: String]?) -> AnyPublisher<T, APIError> {
+    static public func fetch(endpoint: Endpoint,
+                                         params: [String: String]?) -> AnyPublisher<Data, APIError> {
         let queryURL = baseURL.appendingPathComponent(endpoint.path())
         var components = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         components.queryItems = [
@@ -114,7 +114,6 @@ public struct APIService {
                 
                 return data
             }
-            .decode(type: T.self, decoder: JSONDecoder())
             .mapError { error in
                 if let err = error as? APIError {
                     return err
