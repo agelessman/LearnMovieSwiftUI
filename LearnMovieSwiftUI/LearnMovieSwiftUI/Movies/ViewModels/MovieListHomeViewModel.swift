@@ -56,9 +56,7 @@ final class MovieListHomeViewModel: ObservableObject {
                 $0.results
             }
             .replaceError(with: [])
-            .scan([], {
-                $0 + $1
-            })
+            .receive(on: RunLoop.main)
             .assign(to: \.movies, on: self)
             .store(in: &cancellables)
     }

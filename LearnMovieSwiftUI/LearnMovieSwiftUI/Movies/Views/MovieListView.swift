@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct MovieListView: View {
-    var movies: [Movie]
-    var selectedMenu: Binding<MoviesMenu>
+    let movies: [Movie]
+    @Binding var selectedMenu: MoviesMenu
     
     var body: some View {
-        Text("dd")
-        HStack {
-            ForEach(MoviesMenu.allCases, id: \.self) { menu in
-                Text(menu.title())
+        VStack(spacing: 0) {
+            MovieListMenuSelector(menus: MoviesMenu.allCases,
+                                  selectedMenu: $selectedMenu)
+            List(movies) { movie in
+                Text(movie.title)
             }
+            .listStyle(PlainListStyle())
         }
     }
 }

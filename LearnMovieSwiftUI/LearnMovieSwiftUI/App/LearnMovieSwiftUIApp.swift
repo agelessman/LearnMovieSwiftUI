@@ -30,7 +30,7 @@ struct LearnMovieSwiftUIApp: App {
         
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor(named: "steam_purple")!,
-            NSAttributedString.Key.font: UIFont(name: "FjallaOne-Regular", size: 18)!]
+            NSAttributedString.Key.font: UIFont(name: "FjallaOne-Regular", size: 22)!]
         
         UIBarButtonItem.appearance().setTitleTextAttributes([
                                                                 NSAttributedString.Key.foregroundColor: UIColor(named: "steam_purple")!,
