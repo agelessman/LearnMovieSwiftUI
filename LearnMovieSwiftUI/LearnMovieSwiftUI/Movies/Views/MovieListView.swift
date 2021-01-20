@@ -12,11 +12,14 @@ struct MovieListView: View {
     @Binding var selectedMenu: MoviesMenu
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack {
             MovieListMenuSelector(menus: MoviesMenu.allCases,
                                   selectedMenu: $selectedMenu)
-            List(movies) { movie in
-                Text(movie.title)
+            
+            List {
+                ForEach(movies) { movie in
+                    MovieListRow(movie: movie)
+                }
             }
             .listStyle(PlainListStyle())
         }
