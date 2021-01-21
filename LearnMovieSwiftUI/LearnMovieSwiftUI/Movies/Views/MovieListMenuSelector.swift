@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MovieListMenuSelector: View {
     let menus: [MoviesMenu]
-    @Binding var selectedMenu: MoviesMenu
+    @Binding var selectedIndex: Int
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -18,14 +18,16 @@ struct MovieListMenuSelector: View {
                     ForEach(0..<menus.count) { index in
                         MenuSelectorItem(title: menus[index].title(),
                                          index: index,
-                                         selected: selectedMenu.title() == menus[index].title())
+                                         selected: selectedIndex == index)
                             .id(index) /// 需要绑定id
                             .onTapGesture {
-                                withAnimation {
-                                    self.selectedMenu = menus[index]
-                                    
-                                    /// 滚动到可见区域
-                                    scrollViewProxy.scrollTo(index, anchor: .center)
+                                if self.selectedIndex != index {
+                                    withAnimation {
+                                        self.selectedIndex = index
+                                        
+                                        /// 滚动到可见区域
+                                        scrollViewProxy.scrollTo(index, anchor: .center)
+                                    }
                                 }
                             }
                     }
@@ -42,8 +44,7 @@ struct MovieListMenuSelector: View {
     }
     
     func createBottomLine(_ proxy: GeometryProxy, preferences: [MenuSelectorPreferenceData]) -> some View {
-        let selectedIndex = menus.firstIndex(of: self.selectedMenu)!
-        let p = preferences.first(where: { $0.viewIdx == selectedIndex })
+        let p = preferences.first(where: { $0.viewIdx == self.selectedIndex })
 
         let bounds = proxy[p!.bounds]
         
@@ -86,6 +87,6 @@ struct MenuSelectorPreferenceKey: PreferenceKey {
 struct MovieListMenuSelector_Previews: PreviewProvider {
     static var previews: some View {
         MovieListMenuSelector(menus: MoviesMenu.allCases,
-                              selectedMenu: .constant(MoviesMenu.allCases.first!))
+                              selectedIndex: .constant(0))
     }
 }

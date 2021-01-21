@@ -35,7 +35,8 @@ struct MovieListHomeView: View {
     var body: some View {
         Group {
             MovieListView(movies: viewModel.movies,
-                          selectedMenu: $viewModel.selectedMenu)
+                          selectedIndex: $viewModel.selectedIndex,
+                          page: $viewModel.page)
         }
         .navigationBarTitle(viewModel.navTitle, displayMode: .inline)
         .navigationBarItems(trailing: HStack {

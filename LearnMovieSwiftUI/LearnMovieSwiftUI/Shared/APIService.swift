@@ -91,6 +91,7 @@ public struct APIService {
         }
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
+        request.timeoutInterval = 20
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response in

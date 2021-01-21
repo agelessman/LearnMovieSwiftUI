@@ -12,12 +12,10 @@ final class MovieListHomeViewModel: ObservableObject {
     @Published var navTitle = ""
     @Published var swapBtnImgName = ""
     @Published var homeModel: HomeMode = HomeMode.list
-    @Published var selectedMenu: MoviesMenu = MoviesMenu.allCases.first!
-    
+    @Published var selectedIndex: Int = 0
     @Published var movies = [Movie]()
-    
-    
-    var page: Int = 1
+    @Published var page: Int = 1
+
     
     var cancellables = Set<AnyCancellable>()
     
@@ -46,18 +44,39 @@ final class MovieListHomeViewModel: ObservableObject {
             .store(in: &cancellables)
         
         /// 选中后请求数据
-        $selectedMenu
-            .flatMap {
-                APIService.fetch(endpoint: $0.endpoint(), params: ["page": "\(self.page)",
-                                                                   "language": "zh"])
+        $selectedIndex
+            .delay(for: 0.1, scheduler: RunLoop.main)
+            .sink { _ in
+                self.page = 1
             }
+            .store(in: &cancellables)
+        
+        /// 加载更多
+        $page
+            .map { _ in
+                APIService.fetch(endpoint: MoviesMenu.allCases[self.selectedIndex].endpoint(),
+                                 params: ["page": "\(self.page)",
+                                          "language": "zh",
+                                          "region": "US"])
+            }
+            .switchToLatest()
             .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
             .map {
                 $0.results
             }
+            .catch { err -> AnyPublisher<[Movie], Never> in
+                print(err)
+                return Just([]).eraseToAnyPublisher()
+            }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
-            .assign(to: \.movies, on: self)
+            .sink {
+                if self.page == 1 {
+                    self.movies = $0
+                } else {
+                    self.movies.append(contentsOf: $0)
+                }
+            }
             .store(in: &cancellables)
     }
     
