@@ -8,6 +8,12 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
+fileprivate let formatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy年MM月dd日"
+    return formatter
+}()
+
 struct MovieListRow: View {
     let movie: Movie
     
@@ -23,6 +29,32 @@ struct MovieListRow: View {
                 .transition(.fade(duration: 0.5))
                 .scaledToFit()
                 .frame(width: 100, height: 150)
+                .cornerRadius(4)
+            
+            VStack(alignment: .leading) {
+                Text(movie.userTitle)
+                    .titleStyle()
+                    .foregroundColor(.steam_theme)
+                    .lineLimit(2)
+                
+                HStack(spacing: 10) {
+                    MoviePopularityBadge(pct: CGFloat(movie.vote_average) / 10,
+                                         textColor: .primary)
+                    
+                    Text("上映日期 \(formatter.string(from: movie.releaseDate ?? Date()))")
+                        .foregroundColor(.secondary)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                }
+                
+                Text(movie.overview)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(4)
+                    .truncationMode(.tail)
+                
+                Spacer()
+            }
         }
     }
 }

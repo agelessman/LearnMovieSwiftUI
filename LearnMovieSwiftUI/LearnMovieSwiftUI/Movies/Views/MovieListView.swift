@@ -12,7 +12,7 @@ struct MovieListView: View {
     @Binding var selectedMenu: MoviesMenu
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             MovieListMenuSelector(menus: MoviesMenu.allCases,
                                   selectedMenu: $selectedMenu)
             

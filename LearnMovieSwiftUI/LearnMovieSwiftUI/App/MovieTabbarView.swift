@@ -21,28 +21,28 @@ struct MovieTabbarView: View {
                         MovieListHomeView()
                     }
                     .tabItem {
-                        MovieTabbarItem(title: "Movies", imageName: "film")
+                        MovieTabbarItem(title: "电影", imageName: "film")
                     }
                     .tag(Tab.movies)
                     NavigationView {
                         MovieDiscoverHomeView()
                     }
                     .tabItem {
-                        MovieTabbarItem(title: "Discover", imageName: "square.stack")
+                        MovieTabbarItem(title: "发现", imageName: "square.stack")
                     }
                     .tag(Tab.discover)
                     NavigationView {
                         MovieFanClubHomeView()
                     }
                     .tabItem {
-                        MovieTabbarItem(title: "Fan Club", imageName: "star.circle.fill")
+                        MovieTabbarItem(title: "喜欢", imageName: "star.circle.fill")
                     }
                     .tag(Tab.fanClub)
                     NavigationView {
                         MovieMyListHomeView()
                     }
                     .tabItem {
-                        MovieTabbarItem(title: "My Lists", imageName: "heart.circle")
+                        MovieTabbarItem(title: "我的", imageName: "heart.circle")
                     }
                     .tag(Tab.myLists)
                 })

@@ -83,7 +83,6 @@ public struct APIService {
         var components = URLComponents(url: queryURL, resolvingAgainstBaseURL: true)!
         components.queryItems = [
            URLQueryItem(name: "api_key", value: apiKey),
-           URLQueryItem(name: "language", value: Locale.preferredLanguages[0])
         ]
         if let params = params {
             for (_, value) in params.enumerated() {

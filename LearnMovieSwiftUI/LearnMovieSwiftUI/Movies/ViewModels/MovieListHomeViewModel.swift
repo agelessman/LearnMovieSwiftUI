@@ -49,7 +49,7 @@ final class MovieListHomeViewModel: ObservableObject {
         $selectedMenu
             .flatMap {
                 APIService.fetch(endpoint: $0.endpoint(), params: ["page": "\(self.page)",
-                                                                   "region": AppUserDefaults.region])
+                                                                   "language": "zh"])
             }
             .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
             .map {

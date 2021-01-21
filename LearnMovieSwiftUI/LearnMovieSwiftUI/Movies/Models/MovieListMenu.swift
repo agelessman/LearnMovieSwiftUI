@@ -12,12 +12,12 @@ enum MoviesMenu: Int, CaseIterable {
     
     func title() -> String {
         switch self {
-        case .popular: return "Popular"
-        case .topRated: return "Top Rated"
-        case .upcoming: return "Upcoming"
-        case .nowPlaying: return "Now Playing"
-        case .trending: return "Trending"
-        case .genres: return "Genres"
+        case .popular: return "流行"
+        case .topRated: return "高分"
+        case .upcoming: return "即将上映"
+        case .nowPlaying: return "正在热映"
+        case .trending: return "热门"
+        case .genres: return "分类"
         }
     }
     

@@ -37,7 +37,6 @@ struct MovieListHomeView: View {
             MovieListView(movies: viewModel.movies,
                           selectedMenu: $viewModel.selectedMenu)
         }
-        .background(Color.green)
         .navigationBarTitle(viewModel.navTitle, displayMode: .inline)
         .navigationBarItems(trailing: HStack {
             swapHomeButton
