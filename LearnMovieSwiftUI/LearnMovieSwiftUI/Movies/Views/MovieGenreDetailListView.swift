@@ -10,13 +10,63 @@ import SwiftUI
 struct MovieGenreDetailListView: View {
     let genre: MovieGenre
     
+    @StateObject private var viewModel = MovieGenreDetailListViewModel()
+    @State private var isSortSheetPresented = false
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 0) {
+                ForEach(viewModel.movies) { movie in
+                    MovieListRow(movie: movie)
+                }
+
+                /// 加载更多
+                if !viewModel.movies.isEmpty {
+                    HStack {
+                        Spacer()
+                        ProgressView("正在加载数据...")
+                        Spacer()
+                    }
+                    .onAppear {
+                        viewModel.loadMoreData()
+                    }
+                }
+            }
+        }
+        .navigationBarTitle(genre.name, displayMode: .large)
+        .navigationBarItems(trailing: (
+            Button(action: {
+                self.isSortSheetPresented.toggle()
+            }) {
+                Image(systemName: "arrow.up.arrow.down.circle.fill")
+                    .imageScale(.large)
+                    .foregroundColor(.steam_theme)
+            }
+        ))
+        .actionSheet(isPresented: $isSortSheetPresented) {
+            var buttons: [ActionSheet.Button] = []
+            
+            for sort in MoviesSort.allCases {
+                buttons.append(.default(Text(sort.title()), action: {
+                    self.viewModel.sortBy = sort
+                    self.viewModel.loadNewData()
+                }))
+            }
+            buttons.append(.cancel())
+            
+            return ActionSheet(title: Text("选择排序方式"),
+                               message: nil,
+                               buttons: buttons)
+        }
+        .onAppear {
+            viewModel.genre = genre
+            viewModel.loadData()
+        }
     }
 }
 
 struct MovieGenreDetailListView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieGenreDetailListView(genre: MovieGenre(id: 1, name: "动作"))
+        MovieGenreDetailListView(genre: MovieGenre(id: 0, name: "test"))
     }
 }

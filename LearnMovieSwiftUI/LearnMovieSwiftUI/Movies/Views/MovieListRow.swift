@@ -25,7 +25,13 @@ struct MovieListRow: View {
                     Rectangle()
                         .foregroundColor(Color("steam_purple").opacity(0.5))
                         .frame(width: 100, height: 150)
+                        .overlay(
+                            Text("暂无图片")
+                                .foregroundColor(.white)
+                                .font(.caption)
+                        )
                 }
+                
                 .transition(.fade(duration: 0.5))
                 .scaledToFit()
                 .frame(width: 100, height: 150)

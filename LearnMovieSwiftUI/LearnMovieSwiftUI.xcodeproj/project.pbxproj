@@ -20,6 +20,9 @@
 		9B87D8E825BA7B5D00360BB0 /* MovieGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87D8E725BA7B5D00360BB0 /* MovieGenre.swift */; };
 		9B87D8EC25BA7CE800360BB0 /* MovieListGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87D8EB25BA7CE800360BB0 /* MovieListGenreView.swift */; };
 		9B87D8F025BA80BC00360BB0 /* MovieGenreDetailListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87D8EF25BA80BC00360BB0 /* MovieGenreDetailListView.swift */; };
+		9B87D8F725BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87D8F625BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift */; };
+		9B87D8FA25BAC1D900360BB0 /* MovieSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B87D8F925BAC1D900360BB0 /* MovieSort.swift */; };
+		9B87D8FF25BACFC000360BB0 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 9B87D8FE25BACFC000360BB0 /* Introspect */; };
 		9B8A896C25B92E36008CC899 /* Color-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A896B25B92E36008CC899 /* Color-Extensions.swift */; };
 		9B8A896F25B92EC3008CC899 /* Font-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A896E25B92EC3008CC899 /* Font-Extensions.swift */; };
 		9B8A897325B95A43008CC899 /* MoviePopularityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A897225B95A43008CC899 /* MoviePopularityBadge.swift */; };
@@ -51,6 +54,8 @@
 		9B87D8E725BA7B5D00360BB0 /* MovieGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenre.swift; sourceTree = "<group>"; };
 		9B87D8EB25BA7CE800360BB0 /* MovieListGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGenreView.swift; sourceTree = "<group>"; };
 		9B87D8EF25BA80BC00360BB0 /* MovieGenreDetailListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreDetailListView.swift; sourceTree = "<group>"; };
+		9B87D8F625BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenreDetailListViewModel.swift; sourceTree = "<group>"; };
+		9B87D8F925BAC1D900360BB0 /* MovieSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSort.swift; sourceTree = "<group>"; };
 		9B8A896B25B92E36008CC899 /* Color-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extensions.swift"; sourceTree = "<group>"; };
 		9B8A896E25B92EC3008CC899 /* Font-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font-Extensions.swift"; sourceTree = "<group>"; };
 		9B8A897225B95A43008CC899 /* MoviePopularityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePopularityBadge.swift; sourceTree = "<group>"; };
@@ -77,6 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B866E3625B840CB003BC41D /* SDWebImageSwiftUI in Frameworks */,
+				9B87D8FF25BACFC000360BB0 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +218,7 @@
 				9B866E2525B7CD34003BC41D /* Movie.swift */,
 				9B866E2825B7CDD6003BC41D /* MovieListPageResponse.swift */,
 				9B87D8E725BA7B5D00360BB0 /* MovieGenre.swift */,
+				9B87D8F925BAC1D900360BB0 /* MovieSort.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA822C725B5904E00A12F29 /* MovieListHomeViewModel.swift */,
+				9B87D8F625BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 			name = LearnMovieSwiftUI;
 			packageProductDependencies = (
 				9B866E3525B840CB003BC41D /* SDWebImageSwiftUI */,
+				9B87D8FE25BACFC000360BB0 /* Introspect */,
 			);
 			productName = LearnMovieSwiftUI;
 			productReference = 9BA8228125B53DDB00A12F29 /* LearnMovieSwiftUI.app */;
@@ -351,6 +360,7 @@
 			mainGroup = 9BA8227825B53DDB00A12F29;
 			packageReferences = (
 				9B866E3425B840CB003BC41D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				9B87D8FD25BACFC000360BB0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 9BA8228225B53DDB00A12F29 /* Products */;
 			projectDirPath = "";
@@ -379,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B87D8FA25BAC1D900360BB0 /* MovieSort.swift in Sources */,
 				9BA8228E25B53DDB00A12F29 /* Persistence.swift in Sources */,
 				9B8A896C25B92E36008CC899 /* Color-Extensions.swift in Sources */,
 				9B87D8E825BA7B5D00360BB0 /* MovieGenre.swift in Sources */,
@@ -403,6 +414,7 @@
 				9B866E1D25B6E3D4003BC41D /* MovieListMenu.swift in Sources */,
 				9B866E2925B7CDD6003BC41D /* MovieListPageResponse.swift in Sources */,
 				9B866E2625B7CD34003BC41D /* Movie.swift in Sources */,
+				9B87D8F725BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift in Sources */,
 				9B8A897325B95A43008CC899 /* MoviePopularityBadge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,6 +614,14 @@
 				minimumVersion = 1.5.0;
 			};
 		};
+		9B87D8FD25BACFC000360BB0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -609,6 +629,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B866E3425B840CB003BC41D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		9B87D8FE25BACFC000360BB0 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B87D8FD25BACFC000360BB0 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 

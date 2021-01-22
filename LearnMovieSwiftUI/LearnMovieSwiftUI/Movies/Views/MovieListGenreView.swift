@@ -12,7 +12,8 @@ struct MovieListGenreView: View {
     
     var body: some View {
         List(viewModel.genres) { genre in
-            NavigationLink(destination: MovieGenreDetailListView(genre: genre)) {
+            NavigationLink(destination:
+                            MovieGenreDetailListView(genre: genre)) {
                 Text(genre.name)
             }
         }
