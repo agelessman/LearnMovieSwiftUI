@@ -14,7 +14,10 @@ final class MovieListHomeViewModel: ObservableObject {
     @Published var homeModel: HomeMode = HomeMode.list
     @Published var selectedIndex: Int = 0
     @Published var movies = [Movie]()
-    @Published var page: Int = 1
+    
+    private var page: Int = 1
+    
+    let pagePublisher = PassthroughSubject<Int, Never>()
 
     
     var cancellables = Set<AnyCancellable>()
@@ -48,14 +51,15 @@ final class MovieListHomeViewModel: ObservableObject {
             .delay(for: 0.1, scheduler: RunLoop.main)
             .sink { _ in
                 self.page = 1
+                self.loadData()
             }
             .store(in: &cancellables)
         
         /// 加载更多
-        $page
-            .map { _ in
+        pagePublisher
+            .map { page in
                 APIService.fetch(endpoint: MoviesMenu.allCases[self.selectedIndex].endpoint(),
-                                 params: ["page": "\(self.page)",
+                                 params: ["page": "\(page)",
                                           "language": "zh",
                                           "region": "US"])
             }
@@ -74,14 +78,31 @@ final class MovieListHomeViewModel: ObservableObject {
                 if self.page == 1 {
                     self.movies = $0
                 } else {
-                    self.movies.append(contentsOf: $0)
+                    if $0.isEmpty {
+                        self.page -= 1
+                    } else {
+                        self.movies.append(contentsOf: $0)
+                    }
                 }
             }
             .store(in: &cancellables)
+        
+        
+        /// 初始化加载数据
+        loadData()
     }
     
     func swapHomeMode() {
         homeModel == .grid ? (homeModel = .list) : (homeModel = .grid)
+    }
+    
+    func loadMoreData() {
+        page += 1
+        loadData()
+    }
+    
+    func loadData() {
+        pagePublisher.send(page)
     }
 }
 

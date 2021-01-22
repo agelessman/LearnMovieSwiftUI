@@ -56,6 +56,15 @@ struct MovieListRow: View {
                 Spacer()
             }
         }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .overlay(
+            VStack(spacing: 0) {
+                Spacer()
+                Divider()
+                    .padding(.horizontal, 12)
+            }
+        )
     }
 }
 

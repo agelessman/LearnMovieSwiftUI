@@ -26,7 +26,9 @@ struct MoviePopularityBadgeAnimatableModifier: AnimatableModifier {
     
     var arcShapeColor: Color {
         switch pct {
-        case 0..<0.4:
+        case 0:
+            return Color.gray.opacity(0.5)
+        case 0.1..<0.4:
             return .red
         case 0.4..<0.6:
             return .orange
@@ -66,7 +68,7 @@ struct MoviePopularityBadgeAnimatableModifier: AnimatableModifier {
            path.addArc(center: CGPoint(x: rect.width / 2.0, y: rect.height / 2.0),
                        radius: rect.height / 2.0,
                        startAngle: .degrees(-90),
-                       endAngle: .degrees(Double(pct) * 360 - 90),
+                       endAngle: .degrees(pct == 0 ? 270 : Double(pct) * 360 - 90),
                        clockwise: false)
            return path.strokedPath(.init(lineWidth: 3, dash: [1], dashPhase: 0))
        }

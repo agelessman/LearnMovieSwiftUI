@@ -34,10 +34,9 @@ struct MovieListHomeView: View {
     
     var body: some View {
         Group {
-            MovieListView(movies: viewModel.movies,
-                          selectedIndex: $viewModel.selectedIndex,
-                          page: $viewModel.page)
+            MovieListView(movies: viewModel.movies)
         }
+        .environmentObject(viewModel)
         .navigationBarTitle(viewModel.navTitle, displayMode: .inline)
         .navigationBarItems(trailing: HStack {
             swapHomeButton

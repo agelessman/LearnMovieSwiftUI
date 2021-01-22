@@ -9,37 +9,40 @@ import SwiftUI
 
 struct MovieListView: View {
     let movies: [Movie]
-    @Binding var selectedIndex: Int
-    @Binding var page: Int
+
+    @EnvironmentObject var viewModel: MovieListHomeViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            MovieListMenuSelector(menus: MoviesMenu.allCases,
-                                  selectedIndex: $selectedIndex)
             
-            List {
-                ForEach(movies) { movie in
-                    MovieListRow(movie: movie)
-                }
-                
-                /// 加载更多
-                if !movies.isEmpty {
-                    Rectangle()
-                        .foregroundColor(.clear)
-//                        .onAppear {
-//                            self.page += 1
-//                        }
-                }
+            MovieListMenuSelector(menus: MoviesMenu.allCases,
+                                  selectedIndex: $viewModel.selectedIndex)
+            
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 0) {
+                    ForEach(movies) { movie in
+                        MovieListRow(movie: movie)
+                    }
+                    
+                    /// 加载更多
+                    if !movies.isEmpty {
+                        HStack {
+                            Spacer()
+                            ProgressView("正在加载数据...")
+                            Spacer()
+                        }
+                        .onAppear {
+                            viewModel.loadMoreData()
+                        }
+                    }
+                } 
             }
-            .listStyle(PlainListStyle())
         }
     }
 }
 
 struct MovieListView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieListView(movies: [sampleMovie],
-                      selectedIndex: .constant(0),
-                      page: .constant(1))
+        MovieListView(movies: [sampleMovie])
     }
 }
