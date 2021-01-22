@@ -26,7 +26,7 @@ struct MovieListMenuSelector: View {
                                         self.selectedIndex = index
                                         
                                         /// 滚动到可见区域
-                                        scrollViewProxy.scrollTo(index, anchor: .center)
+                                        scrollViewProxy.scrollTo(index, anchor: .trailing)
                                     }
                                 }
                             }

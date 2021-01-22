@@ -34,7 +34,7 @@ struct MovieListHomeView: View {
     
     var body: some View {
         Group {
-            MovieListView(movies: viewModel.movies)
+            MovieListView()
         }
         .environmentObject(viewModel)
         .navigationBarTitle(viewModel.navTitle, displayMode: .inline)

@@ -34,7 +34,7 @@ struct Movie: Codable, Identifiable {
         return formatter
     }()
     
-    let genres: [Genre]?
+    let genres: [MovieGenre]?
     let runtime: Int?
     let status: String?
     let video: Bool
@@ -64,11 +64,6 @@ struct Movie: Codable, Identifiable {
     }
 }
 
-struct Genre: Codable, Identifiable {
-    let id: Int
-    let name: String
-}
-
 let sampleMovie = Movie(id: 0,
                         original_title: "Test movie Test movie Test movie Test movie Test movie Test movie Test movie ",
                         title: "Test movie Test movie Test movie Test movie Test movie Test movie Test movie  Test movie Test movie Test movie",
@@ -79,7 +74,7 @@ let sampleMovie = Movie(id: 0,
                         vote_average: 8.9,
                         vote_count: 1000,
                         release_date: "1972-03-14",
-                        genres: [Genre(id: 0, name: "test")],
+                        genres: [MovieGenre(id: 0, name: "test")],
                         runtime: 80,
                         status: "released",
                         video: false)
