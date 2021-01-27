@@ -40,7 +40,7 @@ struct MovieListMenuSelector: View {
             }
         })
         .padding(.horizontal, 10)
-        .background(Color.white)
+        .background(Color.steam_white)
     }
     
     func createBottomLine(_ proxy: GeometryProxy, preferences: [MenuSelectorPreferenceData]) -> some View {

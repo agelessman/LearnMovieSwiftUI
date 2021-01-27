@@ -34,7 +34,12 @@ struct MovieListHomeView: View {
     
     var body: some View {
         Group {
-            MovieListView()
+            switch viewModel.homeModel {
+            case .list:
+                MovieListView()
+            case .grid:
+                MoiveListGridView()
+            }
         }
         .environmentObject(viewModel)
         .navigationBarTitle(viewModel.navTitle, displayMode: .inline)

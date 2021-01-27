@@ -28,24 +28,18 @@ struct MovieGenreDetailListView: View {
                         Spacer()
                     }
                     .onAppear {
-                        viewModel.loadMoreData()
+                        self.viewModel.loadMoreData()
                     }
                 }
             }
         }
         .navigationBarTitle(genre.name, displayMode: .large)
         .navigationBarItems(trailing: (
-            Button(action: {
-                self.isSortSheetPresented.toggle()
-            }) {
-                Image(systemName: "arrow.up.arrow.down.circle.fill")
-                    .imageScale(.large)
-                    .foregroundColor(.steam_theme)
-            }
+            MovieGenreSortButton(isSortSheetPresented: $isSortSheetPresented)
         ))
         .actionSheet(isPresented: $isSortSheetPresented) {
             var buttons: [ActionSheet.Button] = []
-            
+
             for sort in MoviesSort.allCases {
                 buttons.append(.default(Text(sort.title()), action: {
                     self.viewModel.sortBy = sort
@@ -53,7 +47,7 @@ struct MovieGenreDetailListView: View {
                 }))
             }
             buttons.append(.cancel())
-            
+
             return ActionSheet(title: Text("选择排序方式"),
                                message: nil,
                                buttons: buttons)
@@ -61,6 +55,20 @@ struct MovieGenreDetailListView: View {
         .onAppear {
             viewModel.genre = genre
             viewModel.loadData()
+        }
+    }
+}
+
+struct MovieGenreSortButton: View {
+    @Binding var isSortSheetPresented: Bool
+    
+    var body: some View {
+        Button(action: {
+            isSortSheetPresented.toggle()
+        }) {
+            Image(systemName: "arrow.up.arrow.down.circle.fill")
+                .imageScale(.large)
+                .foregroundColor(.steam_theme)
         }
     }
 }

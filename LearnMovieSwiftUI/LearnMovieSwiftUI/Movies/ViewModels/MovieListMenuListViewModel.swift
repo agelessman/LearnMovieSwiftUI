@@ -1,17 +1,16 @@
 //
-//  MovieGenreDetailListViewModel.swift
+//  MovieListMenuListViewModel.swift
 //  LearnMovieSwiftUI
 //
-//  Created by MC on 2021/1/22.
+//  Created by MC on 2021/1/27.
 //
 
 import Foundation
 import Combine
 
-class MovieGenreDetailListViewModel: ObservableObject {
-    var genre: MovieGenre?
+class MovieListMenuListViewModel: ObservableObject {
+    var menu: MoviesMenu?
     
-    var sortBy: MoviesSort = .byPopularity
     @Published var movies = [Movie]()
 
     private var page: Int = 1
@@ -25,21 +24,15 @@ class MovieGenreDetailListViewModel: ObservableObject {
     init() {
         pagePublisher
             .map { [weak self] page in
-                APIService.fetch(endpoint: APIService.Endpoint.discover,
+                APIService.fetch(endpoint: self?.menu?.endpoint() ?? APIService.Endpoint.nowPlaying,
                                  params: ["page": "\(page)",
-                                          "with_genres": "\(self?.genre?.id ?? 0)",
                                           "language": "zh",
-                                          "region": "US",
-                                          "sort_by": self?.sortBy.sortByAPI() ?? ""])
+                                          "region": "US"])
             }
             .switchToLatest()
             .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
             .map {
                 $0.results
-            }
-            .catch { err -> AnyPublisher<[Movie], Never> in
-                print(err)
-                return Just([]).eraseToAnyPublisher()
             }
             .replaceError(with: [])
             .receive(on: RunLoop.main)

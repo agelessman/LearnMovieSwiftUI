@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B650CAC25C0FF0A000FC0B5 /* MovieListMenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650CAB25C0FF0A000FC0B5 /* MovieListMenuListView.swift */; };
+		9B650CAF25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650CAE25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift */; };
 		9B866E1A25B6B2CC003BC41D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B866E1925B6B2CC003BC41D /* APIService.swift */; };
 		9B866E1D25B6E3D4003BC41D /* MovieListMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B866E1C25B6E3D4003BC41D /* MovieListMenu.swift */; };
 		9B866E2025B7CB49003BC41D /* AppUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B866E1F25B7CB49003BC41D /* AppUserDefaults.swift */; };
@@ -26,6 +28,9 @@
 		9B8A896C25B92E36008CC899 /* Color-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A896B25B92E36008CC899 /* Color-Extensions.swift */; };
 		9B8A896F25B92EC3008CC899 /* Font-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A896E25B92EC3008CC899 /* Font-Extensions.swift */; };
 		9B8A897325B95A43008CC899 /* MoviePopularityBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8A897225B95A43008CC899 /* MoviePopularityBadge.swift */; };
+		9B927CAD25BFF5A700177EE9 /* MoiveListGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CAC25BFF5A700177EE9 /* MoiveListGridView.swift */; };
+		9B927CB025BFF5BE00177EE9 /* MovieListGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */; };
+		9B927CB325C0162300177EE9 /* MovieListGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CB225C0162300177EE9 /* MovieListGridRowView.swift */; };
 		9BA8228525B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8228425B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift */; };
 		9BA8228725B53DDB00A12F29 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8228625B53DDB00A12F29 /* ContentView.swift */; };
 		9BA8228925B53DDB00A12F29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA8228825B53DDB00A12F29 /* Assets.xcassets */; };
@@ -42,6 +47,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B650CAB25C0FF0A000FC0B5 /* MovieListMenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListMenuListView.swift; sourceTree = "<group>"; };
+		9B650CAE25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListMenuListViewModel.swift; sourceTree = "<group>"; };
 		9B866E1925B6B2CC003BC41D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		9B866E1C25B6E3D4003BC41D /* MovieListMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListMenu.swift; sourceTree = "<group>"; };
 		9B866E1F25B7CB49003BC41D /* AppUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefaults.swift; sourceTree = "<group>"; };
@@ -59,6 +66,9 @@
 		9B8A896B25B92E36008CC899 /* Color-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Extensions.swift"; sourceTree = "<group>"; };
 		9B8A896E25B92EC3008CC899 /* Font-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font-Extensions.swift"; sourceTree = "<group>"; };
 		9B8A897225B95A43008CC899 /* MoviePopularityBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePopularityBadge.swift; sourceTree = "<group>"; };
+		9B927CAC25BFF5A700177EE9 /* MoiveListGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoiveListGridView.swift; sourceTree = "<group>"; };
+		9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGridViewModel.swift; sourceTree = "<group>"; };
+		9B927CB225C0162300177EE9 /* MovieListGridRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGridRowView.swift; sourceTree = "<group>"; };
 		9BA8228125B53DDB00A12F29 /* LearnMovieSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnMovieSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA8228425B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMovieSwiftUIApp.swift; sourceTree = "<group>"; };
 		9BA8228625B53DDB00A12F29 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,6 +217,9 @@
 				9B866E3125B83723003BC41D /* MovieListRow.swift */,
 				9B87D8EB25BA7CE800360BB0 /* MovieListGenreView.swift */,
 				9B87D8EF25BA80BC00360BB0 /* MovieGenreDetailListView.swift */,
+				9B927CAC25BFF5A700177EE9 /* MoiveListGridView.swift */,
+				9B927CB225C0162300177EE9 /* MovieListGridRowView.swift */,
+				9B650CAB25C0FF0A000FC0B5 /* MovieListMenuListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +241,8 @@
 			children = (
 				9BA822C725B5904E00A12F29 /* MovieListHomeViewModel.swift */,
 				9B87D8F625BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift */,
+				9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */,
+				9B650CAE25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -394,12 +409,15 @@
 				9B8A896C25B92E36008CC899 /* Color-Extensions.swift in Sources */,
 				9B87D8E825BA7B5D00360BB0 /* MovieGenre.swift in Sources */,
 				9B87D8EC25BA7CE800360BB0 /* MovieListGenreView.swift in Sources */,
+				9B927CB025BFF5BE00177EE9 /* MovieListGridViewModel.swift in Sources */,
 				9BA822B925B5682000A12F29 /* MovieDiscoverHomeView.swift in Sources */,
 				9BA822C025B5686C00A12F29 /* MovieMyListHomeView.swift in Sources */,
+				9B650CAF25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift in Sources */,
 				9B866E2C25B7DCE1003BC41D /* MovieListView.swift in Sources */,
 				9BA8228725B53DDB00A12F29 /* ContentView.swift in Sources */,
 				9B87D8F025BA80BC00360BB0 /* MovieGenreDetailListView.swift in Sources */,
 				9B866E1A25B6B2CC003BC41D /* APIService.swift in Sources */,
+				9B927CB325C0162300177EE9 /* MovieListGridRowView.swift in Sources */,
 				9BA8228525B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift in Sources */,
 				9BA822BD25B5685400A12F29 /* MovieFanClubHomeView.swift in Sources */,
 				9B866E2F25B8006C003BC41D /* MovieListMenuSelector.swift in Sources */,
@@ -408,10 +426,12 @@
 				9B866E2025B7CB49003BC41D /* AppUserDefaults.swift in Sources */,
 				9B8A896F25B92EC3008CC899 /* Font-Extensions.swift in Sources */,
 				9BA822C525B56A3500A12F29 /* MovieTabbarView.swift in Sources */,
+				9B927CAD25BFF5A700177EE9 /* MoiveListGridView.swift in Sources */,
 				9B866E2325B7CBAA003BC41D /* UserDefaultWrapper.swift in Sources */,
 				9BA822C825B5904E00A12F29 /* MovieListHomeViewModel.swift in Sources */,
 				9BA8229125B53DDB00A12F29 /* LearnMovieSwiftUI.xcdatamodeld in Sources */,
 				9B866E1D25B6E3D4003BC41D /* MovieListMenu.swift in Sources */,
+				9B650CAC25C0FF0A000FC0B5 /* MovieListMenuListView.swift in Sources */,
 				9B866E2925B7CDD6003BC41D /* MovieListPageResponse.swift in Sources */,
 				9B866E2625B7CD34003BC41D /* Movie.swift in Sources */,
 				9B87D8F725BAC0BD00360BB0 /* MovieGenreDetailListViewModel.swift in Sources */,
@@ -553,7 +573,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LearnMovieSwiftUI.LearnMovieSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = LearnMovieSwiftUI.LearnMovieSwiftUI.machao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -575,7 +595,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = LearnMovieSwiftUI.LearnMovieSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = LearnMovieSwiftUI.LearnMovieSwiftUI.machao.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

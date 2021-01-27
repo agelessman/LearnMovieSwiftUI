@@ -13,7 +13,7 @@ struct MoviePopularityBadge: View {
     
     var body: some View {
         Circle()
-            .fill(Color.white)
+            .fill(Color.steam_white)
             .frame(width: 40, height: 40)
             .modifier(MoviePopularityBadgeAnimatableModifier(pct: pct,
                                                              textColor: textColor))
