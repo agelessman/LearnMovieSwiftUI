@@ -11,6 +11,7 @@ struct MoiveListGridView: View {
     @StateObject var viewModel = MovieListGridViewModel()
     
     var body: some View {
+        
         ScrollView {
             LazyVStack {
                 ForEach(0..<viewModel.movies.count, id: \.self) { index in
@@ -19,6 +20,32 @@ struct MoiveListGridView: View {
                     }
                 }
             }
+            
+            LazyVStack(spacing: 1) {
+                ForEach(viewModel.genres) { genre in
+                    NavigationLink(destination:
+                                    MovieGenreDetailListView(genre: genre)) {
+                        ZStack {
+                            VStack {
+                                Spacer()
+                                Divider()
+                            }
+                            
+                            HStack {
+                                Text(genre.name)
+                                    .foregroundColor(.primary)
+                                
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .imageScale(.small)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        .frame(height: 40)
+                    }
+                }
+            }
+            .padding(.horizontal, 12)
         }
     }
 }
