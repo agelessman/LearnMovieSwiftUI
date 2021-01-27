@@ -22,7 +22,9 @@ struct MovieListView: View {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
                         ForEach(viewModel.movies) { movie in
-                            MovieListRow(movie: movie)
+                            NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                                MovieListRow(movie: movie)
+                            }
                         }
                         
                         /// 加载更多
