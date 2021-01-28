@@ -15,11 +15,6 @@ struct MovieDetailHeaderView: View {
         ZStack {
             WebImage(url: URL(string: "https://image.tmdb.org/t/p/w500/\(movie.backdrop_path ?? "")"))
                 .resizable()
-                .placeholder {
-                    Rectangle()
-                        .foregroundColor(Color("steam_purple").opacity(0.5))
-                        .frame(height: 200)
-                }
                 .blur(radius: 50, opaque: true)
                 .transition(.fade(duration: 0.5))
                 .scaledToFill()

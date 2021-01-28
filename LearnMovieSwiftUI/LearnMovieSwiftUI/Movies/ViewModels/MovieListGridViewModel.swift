@@ -21,7 +21,7 @@ class MovieListGridViewModel: ObservableObject {
                                  params: ["page": "\(1)",
                                           "language": "zh",
                                           "region": "US"])
-                    .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
+                    .decode(type: PaginatedResponse<Movie>.self, decoder: JSONDecoder())
                     .map {
                         (menu, $0.results)
                     }

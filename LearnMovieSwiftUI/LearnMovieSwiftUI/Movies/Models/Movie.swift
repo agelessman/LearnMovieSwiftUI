@@ -19,7 +19,7 @@ struct Movie: Codable, Identifiable {
     let overview: String
     let poster_path: String?
     let backdrop_path: String?
-    let popularity: Float
+    let popularity: Float?
     let vote_average: Float
     let vote_count: Int
     

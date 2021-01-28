@@ -30,7 +30,7 @@ class MovieListMenuListViewModel: ObservableObject {
                                           "region": "US"])
             }
             .switchToLatest()
-            .decode(type: MovieListPageResponse<Movie>.self, decoder: JSONDecoder())
+            .decode(type: PaginatedResponse<Movie>.self, decoder: JSONDecoder())
             .map {
                 $0.results
             }
