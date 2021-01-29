@@ -23,6 +23,7 @@ struct MovieTabbarView: View {
                     .tabItem {
                         MovieTabbarItem(title: "电影", imageName: "film")
                     }
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .tag(Tab.movies)
                     NavigationView {
                         MovieDiscoverHomeView()
@@ -30,6 +31,7 @@ struct MovieTabbarView: View {
                     .tabItem {
                         MovieTabbarItem(title: "发现", imageName: "square.stack")
                     }
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .tag(Tab.discover)
                     NavigationView {
                         MovieFanClubHomeView()
@@ -37,6 +39,7 @@ struct MovieTabbarView: View {
                     .tabItem {
                         MovieTabbarItem(title: "喜欢", imageName: "star.circle.fill")
                     }
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .tag(Tab.fanClub)
                     NavigationView {
                         MovieMyListHomeView()
@@ -44,6 +47,7 @@ struct MovieTabbarView: View {
                     .tabItem {
                         MovieTabbarItem(title: "我的", imageName: "heart.circle")
                     }
+                    .navigationViewStyle(StackNavigationViewStyle())
                     .tag(Tab.myLists)
                 })
     }

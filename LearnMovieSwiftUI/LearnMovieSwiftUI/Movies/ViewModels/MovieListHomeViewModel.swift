@@ -15,8 +15,10 @@ final class MovieListHomeViewModel: ObservableObject {
     @Published var selectedIndex: Int = 0
     @Published var movies = [Movie]()
     @Published var genres = [MovieGenre]()
+    @Published var showLoadingMore = false
     
     private var page: Int = 1
+    private var totalCount: Int = 0
     
     let pagePublisher = PassthroughSubject<Int, Never>()
     let genresPublisher = PassthroughSubject<Int, Never>()
@@ -51,32 +53,19 @@ final class MovieListHomeViewModel: ObservableObject {
             .assign(to: \.navTitle, on: self)
             .store(in: &cancellables)
         
-        /// 选中后请求数据
-        $selectedIndex
-            .delay(for: 0.1, scheduler: RunLoop.main)
-            .sink { _ in
-                if MoviesMenu.allCases[self.selectedIndex] == MoviesMenu.genres {
-                    self.genresPublisher.send(1)
-                } else {
-                    self.page = 1
-                    self.loadData()
-                }
-                self.loadNavTitle()
-            }
-            .store(in: &cancellables)
-        
         /// 加载更多
         pagePublisher
-            .map { page in
-                APIService.fetch(endpoint: MoviesMenu.allCases[self.selectedIndex].endpoint(),
+            .map {[weak self] page in
+                APIService.fetch(endpoint: MoviesMenu.allCases[self?.selectedIndex ?? 0].endpoint(),
                                  params: ["page": "\(page)",
                                           "language": "zh",
                                           "region": "US"])
             }
             .switchToLatest()
             .decode(type: PaginatedResponse<Movie>.self, decoder: JSONDecoder())
-            .map {
-                $0.results
+            .map { [weak self] value -> [Movie] in
+                self?.totalCount = value.total_results ?? 0
+                return value.results
             }
             .catch { err -> AnyPublisher<[Movie], Never> in
                 print(err)
@@ -84,16 +73,21 @@ final class MovieListHomeViewModel: ObservableObject {
             }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
-            .sink {
-                if self.page == 1 {
-                    self.movies = $0
+            .sink { [weak self] someValue in
+                if self?.page == 1 {
+                    self?.movies = someValue
                 } else {
-                    if $0.isEmpty {
-                        self.page -= 1
-                    } else {
-                        self.movies.append(contentsOf: $0)
+                    if !someValue.isEmpty {
+                        self?.movies.append(contentsOf: someValue)
                     }
                 }
+                
+                if !someValue.isEmpty {
+                    self?.page += 1
+                }
+                
+                /// 是否展示加载更多
+                self?.showLoadingMore = (self?.movies.count ?? 0) < (self?.totalCount ?? 0)
             }
             .store(in: &cancellables)
         
@@ -119,17 +113,23 @@ final class MovieListHomeViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         
-        /// 初始化加载数据
-        loadData()
+        /// 选中后请求数据
+        $selectedIndex
+            .delay(for: 0.1, scheduler: RunLoop.main)
+            .sink { _ in
+                if MoviesMenu.allCases[self.selectedIndex] == MoviesMenu.genres {
+                    self.genresPublisher.send(1)
+                } else {
+                    self.page = 1
+                    self.loadData()
+                }
+                self.loadNavTitle()
+            }
+            .store(in: &cancellables)
     }
     
     func swapHomeMode() {
         homeModel == .grid ? (homeModel = .list) : (homeModel = .grid)
-    }
-    
-    func loadMoreData() {
-        page += 1
-        loadData()
     }
     
     func loadData() {

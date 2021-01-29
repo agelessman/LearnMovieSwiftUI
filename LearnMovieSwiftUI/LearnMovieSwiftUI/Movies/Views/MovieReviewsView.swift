@@ -10,8 +10,38 @@ import SwiftUI
 struct MovieReviewsView: View {
     let movieId: Int
     
+    @StateObject var viewModel = MovieReviewsViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            
+            ForEach(viewModel.reviews) { review in
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(review.author)
+                        .font(.headline)
+                    
+                    Text(review.content)
+                        .font(.body)
+                }
+            }
+            
+            /// 加载更多
+            if viewModel.showLoadingMore {
+                HStack {
+                    Spacer()
+                    ProgressView("正在加载数据...")
+                    Spacer()
+                }
+                .onAppear {
+                    viewModel.loadData()
+                }
+            }
+        }
+        .navigationTitle("点评详情")
+        .onAppear {
+            viewModel.movieId = movieId
+            viewModel.loadData()
+        }
     }
 }
 

@@ -34,6 +34,7 @@
 		9B927CAD25BFF5A700177EE9 /* MoiveListGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CAC25BFF5A700177EE9 /* MoiveListGridView.swift */; };
 		9B927CB025BFF5BE00177EE9 /* MovieListGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */; };
 		9B927CB325C0162300177EE9 /* MovieListGridRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B927CB225C0162300177EE9 /* MovieListGridRowView.swift */; };
+		9B96C0D825C3B2AD00370A88 /* MovieReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B96C0D725C3B2AD00370A88 /* MovieReviewsViewModel.swift */; };
 		9B97EF4B25C2A80F0036BE6D /* MovieReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B97EF4A25C2A80F0036BE6D /* MovieReview.swift */; };
 		9B97EF4E25C2B5EF0036BE6D /* MovieReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B97EF4D25C2B5EF0036BE6D /* MovieReviewsView.swift */; };
 		9BA8228525B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA8228425B53DDB00A12F29 /* LearnMovieSwiftUIApp.swift */; };
@@ -77,6 +78,7 @@
 		9B927CAC25BFF5A700177EE9 /* MoiveListGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoiveListGridView.swift; sourceTree = "<group>"; };
 		9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGridViewModel.swift; sourceTree = "<group>"; };
 		9B927CB225C0162300177EE9 /* MovieListGridRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListGridRowView.swift; sourceTree = "<group>"; };
+		9B96C0D725C3B2AD00370A88 /* MovieReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewsViewModel.swift; sourceTree = "<group>"; };
 		9B97EF4A25C2A80F0036BE6D /* MovieReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReview.swift; sourceTree = "<group>"; };
 		9B97EF4D25C2B5EF0036BE6D /* MovieReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReviewsView.swift; sourceTree = "<group>"; };
 		9BA8228125B53DDB00A12F29 /* LearnMovieSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearnMovieSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -258,6 +260,7 @@
 				9B927CAF25BFF5BE00177EE9 /* MovieListGridViewModel.swift */,
 				9B650CAE25C0FF2D000FC0B5 /* MovieListMenuListViewModel.swift */,
 				9B650CB425C16440000FC0B5 /* MovieDetailViewModel.swift */,
+				9B96C0D725C3B2AD00370A88 /* MovieReviewsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				9BA822C525B56A3500A12F29 /* MovieTabbarView.swift in Sources */,
 				9B927CAD25BFF5A700177EE9 /* MoiveListGridView.swift in Sources */,
 				9B866E2325B7CBAA003BC41D /* UserDefaultWrapper.swift in Sources */,
+				9B96C0D825C3B2AD00370A88 /* MovieReviewsViewModel.swift in Sources */,
 				9BA822C825B5904E00A12F29 /* MovieListHomeViewModel.swift in Sources */,
 				9BA8229125B53DDB00A12F29 /* LearnMovieSwiftUI.xcdatamodeld in Sources */,
 				9B866E1D25B6E3D4003BC41D /* MovieListMenu.swift in Sources */,

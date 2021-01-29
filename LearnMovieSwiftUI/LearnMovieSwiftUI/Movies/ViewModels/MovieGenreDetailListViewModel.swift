@@ -15,10 +15,11 @@ class MovieGenreDetailListViewModel: ObservableObject {
     @Published var movies = [Movie]()
 
     private var page: Int = 1
+    
+    @Published var showLoadingMore = false
+    var totalCount: Int = 0
 
     let pagePublisher = PassthroughSubject<Int, Never>()
-
-    var loading = false
     
     var cancellables = Set<AnyCancellable>()
     
@@ -34,8 +35,9 @@ class MovieGenreDetailListViewModel: ObservableObject {
             }
             .switchToLatest()
             .decode(type: PaginatedResponse<Movie>.self, decoder: JSONDecoder())
-            .map {
-                $0.results
+            .map { [weak self] value -> [Movie] in
+                self?.totalCount = value.total_results ?? 0
+                return value.results
             }
             .catch { err -> AnyPublisher<[Movie], Never> in
                 print(err)
@@ -43,17 +45,21 @@ class MovieGenreDetailListViewModel: ObservableObject {
             }
             .replaceError(with: [])
             .receive(on: RunLoop.main)
-            .sink { [weak self] input in
-                self?.loading = false
+            .sink { [weak self] someValue in
                 if self?.page == 1 {
-                    self?.movies = input
+                    self?.movies = someValue
                 } else {
-                    if input.isEmpty {
-                        self?.page -= 1
-                    } else {
-                        self?.movies.append(contentsOf: input)
+                    if !someValue.isEmpty {
+                        self?.movies.append(contentsOf: someValue)
                     }
                 }
+                
+                if !someValue.isEmpty {
+                    self?.page += 1
+                }
+                
+                /// 是否展示加载更多
+                self?.showLoadingMore = (self?.movies.count ?? 0) < (self?.totalCount ?? 0)
             }
             .store(in: &cancellables)
     }
@@ -61,18 +67,9 @@ class MovieGenreDetailListViewModel: ObservableObject {
     func loadData() {
         pagePublisher.send(page)
     }
-
-    func loadMoreData() {
-        if loading {
-            return
-        }
-        page += 1
-        loadData()
-        loading = true
-    }
     
     func loadNewData() {
-        page = 1
+        self.page = 1
         loadData()
     }
     

@@ -1,49 +1,47 @@
 //
-//  MovieListMenuListViewModel.swift
+//  MovieReviewsViewModel.swift
 //  LearnMovieSwiftUI
 //
-//  Created by MC on 2021/1/27.
+//  Created by MC on 2021/1/29.
 //
 
 import Foundation
 import Combine
 
-class MovieListMenuListViewModel: ObservableObject {
-    var menu: MoviesMenu?
-    
-    @Published var movies = [Movie]()
-
-    private var page: Int = 1
-
-    let pagePublisher = PassthroughSubject<Int, Never>()
-
+class MovieReviewsViewModel: ObservableObject {
+    @Published var reviews: [MovieReview] = []
     @Published var showLoadingMore = false
-    var totalCount: Int = 0
     
+    var movieId: Int?
+
+    var totalCount: Int = 0
+    private var page: Int = 1
+    
+    private let pagePublisher = PassthroughSubject<Int, Never>()
+
     var cancellables = Set<AnyCancellable>()
     
     init() {
         pagePublisher
             .map { [weak self] page in
-                APIService.fetch(endpoint: self?.menu?.endpoint() ?? APIService.Endpoint.nowPlaying,
-                                 params: ["page": "\(page)",
-                                          "language": "zh",
-                                          "region": "US"])
+                APIService.fetch(endpoint: APIService.Endpoint.review(movie: self?.movieId ?? 0),
+                                 params: ["language": "en-US", "page": "\(page)"])
             }
             .switchToLatest()
-            .decode(type: PaginatedResponse<Movie>.self, decoder: JSONDecoder())
-            .map { [weak self] value -> [Movie] in
+            .decode(type: PaginatedResponse<MovieReview>.self, decoder: JSONDecoder())
+            .map { [weak self] value -> [MovieReview] in
                 self?.totalCount = value.total_results ?? 0
                 return value.results
             }
+            .replaceNil(with: [])
             .replaceError(with: [])
             .receive(on: RunLoop.main)
             .sink { [weak self] someValue in
                 if self?.page == 1 {
-                    self?.movies = someValue
+                    self?.reviews = someValue
                 } else {
                     if !someValue.isEmpty {
-                        self?.movies.append(contentsOf: someValue)
+                        self?.reviews.append(contentsOf: someValue)
                     }
                 }
                 
@@ -52,7 +50,7 @@ class MovieListMenuListViewModel: ObservableObject {
                 }
                 
                 /// 是否展示加载更多
-                self?.showLoadingMore = (self?.movies.count ?? 0) < (self?.totalCount ?? 0)
+                self?.showLoadingMore = (self?.reviews.count ?? 0) < (self?.totalCount ?? 0)
             }
             .store(in: &cancellables)
     }

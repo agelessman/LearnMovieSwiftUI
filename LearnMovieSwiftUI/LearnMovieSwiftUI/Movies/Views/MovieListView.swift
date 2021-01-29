@@ -28,14 +28,14 @@ struct MovieListView: View {
                         }
                         
                         /// 加载更多
-                        if !viewModel.movies.isEmpty {
+                        if viewModel.showLoadingMore {
                             HStack {
                                 Spacer()
                                 ProgressView("正在加载数据...")
                                 Spacer()
                             }
                             .onAppear {
-                                viewModel.loadMoreData()
+                                viewModel.loadData()
                             }
                         }
                     }
