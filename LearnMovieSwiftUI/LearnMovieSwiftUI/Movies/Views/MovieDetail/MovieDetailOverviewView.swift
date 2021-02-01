@@ -1,58 +1,23 @@
 //
-//  MovieDetailView.swift
+//  MovieDetailOverviewView.swift
 //  LearnMovieSwiftUI
 //
-//  Created by MC on 2021/1/27.
+//  Created by MC on 2021/2/1.
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
-struct MovieDetailView: View {
-    let movieId: Int
-    
-    @StateObject var viewModel = MovieDetailViewModel()
+struct MovieDetailOverviewView: View {
+    let overview: String
     
     var body: some View {
-        ScrollView {
-            /// 头部
-            if viewModel.movie != nil {
-                MovieDetailHeaderView(movie: viewModel.movie!)
-            }
+        VStack(alignment: .leading, spacing: 10) {
+            Text("简介")
+                .foregroundColor(.primary)
             
-            /// 评论
-            if viewModel.reviewCount > 0 {
-                NavigationLink(destination: MovieReviewsView(movieId: movieId)) {
-                    HStack {
-                        Text("\(viewModel.reviewCount)条评论")
-                            .foregroundColor(.primary)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .imageScale(.small)
-                            .foregroundColor(.secondary)
-                    }
-                    .frame(height: 40)
-                    .padding(.horizontal, 10)
-                }
-            }
-            
-            /// 简介
-            if viewModel.movie?.overview != nil {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("简介")
-                        .foregroundColor(.primary)
-                    
-                    MovieDetailOverviewText(viewModel.movie!.overview)
-                }
-                .padding(.horizontal, 10)
-            }
+            MovieDetailOverviewText(overview)
         }
-        .navigationBarTitle("电影详情", displayMode: .automatic)
-        .onAppear {
-            viewModel.loadDetail(movieId: movieId)
-        }
+        .padding(.horizontal, 10)
     }
 }
 
@@ -122,8 +87,8 @@ struct MovieDetailOverviewText: View {
 
 }
 
-struct MovieDetailView_Previews: PreviewProvider {
+struct MovieDetailOverviewView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movieId: 0)
+        MovieDetailOverviewView(overview: "test")
     }
 }

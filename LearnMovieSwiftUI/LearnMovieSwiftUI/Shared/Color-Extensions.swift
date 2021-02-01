@@ -15,4 +15,7 @@ extension Color {
     public static var steam_white: Color {
         Color("system_white", bundle: nil)
     }
+    public static var steam_systemBackground: Color {
+        Color("steam_background", bundle: nil)
+    }
 }
