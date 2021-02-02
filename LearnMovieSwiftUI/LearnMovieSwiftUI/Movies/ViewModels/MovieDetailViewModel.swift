@@ -12,9 +12,12 @@ class MovieDetailViewModel: ObservableObject {
     @Published var movie: Movie?
     @Published var error: Error?
     @Published var reviewCount: Int = 0
+    @Published var characters: [People] = []
+    @Published var credits: [People] = []
     
     let detailPublisher = PassthroughSubject<Int, Never>()
     let reviewPublisher = PassthroughSubject<Int, Never>()
+    let castsPublisher = PassthroughSubject<Int, Never>()
 
     var cancellables = Set<AnyCancellable>()
     
@@ -41,7 +44,7 @@ class MovieDetailViewModel: ObservableObject {
             })
             .store(in: &cancellables)
         
-        detailPublisher
+        reviewPublisher
             .map { movieId in
                 APIService.fetch(endpoint: APIService.Endpoint.review(movie: movieId),
                                  params: ["language": "en-US"])
@@ -58,11 +61,27 @@ class MovieDetailViewModel: ObservableObject {
                 self?.reviewCount = someValue
             }
             .store(in: &cancellables)
+        
+        castsPublisher
+            .map { movieId in
+                APIService.fetch(endpoint: APIService.Endpoint.credits(movie: movieId),
+                                 params: nil)
+            }
+            .switchToLatest()
+            .decode(type: CastResponse.self, decoder: JSONDecoder())
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { _ in
+            }, receiveValue: { [weak self] someValue in
+                self?.characters = someValue.cast
+                self?.credits = someValue.crew
+            })
+            .store(in: &cancellables)
     }
     
     func loadDetail(movieId: Int) {
         detailPublisher.send(movieId)
         reviewPublisher.send(movieId)
+        castsPublisher.send(movieId)
     }
     
     deinit {
