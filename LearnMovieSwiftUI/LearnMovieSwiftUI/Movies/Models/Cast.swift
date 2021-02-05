@@ -49,3 +49,7 @@ struct CastResponse: Codable {
     let crew: [People]
 }
 
+struct PeopleCreditsResponse: Codable {
+    let cast: [Movie]?
+    let crew: [Movie]?
+}

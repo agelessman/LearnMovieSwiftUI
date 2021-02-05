@@ -37,7 +37,7 @@ struct MovieDetailCrossLinePeopleRowView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach(peoples) { people in
-                        NavigationLink(destination: MoviePeopleDetailView(people: people)) {
+                        NavigationLink(destination: MoviePeopleDetailView(peopleId: people.id)) {
                             PeopleRowItem(people: people)
                         }
                     }
@@ -92,7 +92,7 @@ struct PeoplesListView: View {
     var body: some View {
         List {
             ForEach(peoples) { people in
-                NavigationLink(destination: MoviePeopleDetailView(people: people)) {
+                NavigationLink(destination: MoviePeopleDetailView(peopleId: people.id)) {
                     HStack {
                         WebImage(url: URL(string: "https://image.tmdb.org/t/p/w185/\(people.profile_path ?? "")"))
                             .resizable()
