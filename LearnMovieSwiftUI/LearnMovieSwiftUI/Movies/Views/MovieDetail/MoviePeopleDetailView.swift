@@ -20,7 +20,7 @@ struct MoviePeopleDetailView: View {
     private var items: FetchedResults<FanClubPeople>
     
     @StateObject var viewModel = MoviePeopleDetailViewModel()
-    @State private var selectedPoster: ImageData?
+    @State private var selectedPosterIndex: Int = 0
     
     @ViewBuilder private var headerRow: some View {
         if viewModel.people != nil {
@@ -61,8 +61,7 @@ struct MoviePeopleDetailView: View {
     
     @ViewBuilder private var imagesRow: some View {
         if !viewModel.profiles.isEmpty {
-            MoviePeopleDetailImagesRow(images: viewModel.profiles,
-                                       selectedPoster: $selectedPoster)
+            MoviePeopleDetailImagesRow(images: viewModel.profiles)
         }
     }
     
