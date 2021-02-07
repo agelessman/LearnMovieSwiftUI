@@ -7,38 +7,126 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import CoreData
 
 struct MoviePeopleDetailView: View {
     let peopleId: Int
     
+    @Environment(\.managedObjectContext) private var viewContext
+
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \FanClubPeople.timestamp, ascending: true)],
+        animation: .default)
+    private var items: FetchedResults<FanClubPeople>
+    
     @StateObject var viewModel = MoviePeopleDetailViewModel()
+    @State private var selectedPoster: ImageData?
+    
+    @ViewBuilder private var headerRow: some View {
+        if viewModel.people != nil {
+            PeopleDetailHeaderRow(people: viewModel.people!)
+        }
+    }
+    
+    @ViewBuilder private var biographyRow: some View {
+        if viewModel.people?.biography?.isEmpty ?? true == false ||
+            viewModel.people?.birthDay?.isEmpty ?? true == false ||
+            viewModel.people?.deathDay?.isEmpty ?? true == false ||
+            viewModel.people?.place_of_birth?.isEmpty ?? true == false {
+            PeopleDetailBiographyRow(biography: viewModel.people?.biography,
+                                     birthDate: viewModel.people?.birthDay,
+                                     deathDate: viewModel.people?.deathDay,
+                                     placeOfBirth: viewModel.people?.place_of_birth)
+        }
+    }
+    
+    @ViewBuilder private var barButtons: some View {
+        if viewModel.people != nil {
+            Button(action: {
+                if isFanClub() {
+                    deleteItems(viewModel.people!)
+                } else {
+                    addItem(viewModel.people!)
+                }
+            }, label: {
+                Image(systemName: isFanClub() ? "star.circle.fill" : "star.circle")
+                    .resizable()
+                    .foregroundColor(isFanClub() ? .steam_theme : .primary)
+                    .scaleEffect(isFanClub() ? 1.1 : 1.0)
+                    .frame(width: 25, height: 25)
+                    .animation(.spring())
+            })
+        }
+    }
+    
+    @ViewBuilder private var imagesRow: some View {
+        if !viewModel.profiles.isEmpty {
+            MoviePeopleDetailImagesRow(images: viewModel.profiles,
+                                       selectedPoster: $selectedPoster)
+        }
+    }
     
     var body: some View {
         ZStack {
             List {
                 Section {
-                    if viewModel.people != nil {
-                        PeopleDetailHeaderRow(people: viewModel.people!)
-                    }
-                    if viewModel.people?.biography?.isEmpty ?? true == false ||
-                        viewModel.people?.birthDay?.isEmpty ?? true == false ||
-                        viewModel.people?.deathDay?.isEmpty ?? true == false ||
-                        viewModel.people?.place_of_birth?.isEmpty ?? true == false {
-                        PeopleDetailBiographyRow(biography: viewModel.people?.biography,
-                                                 birthDate: viewModel.people?.birthDay,
-                                                 deathDate: viewModel.people?.deathDay,
-                                                 placeOfBirth: viewModel.people?.place_of_birth)
-                    }
+                    headerRow
+                    biographyRow
+                    imagesRow
                 }
             }
         }
         .navigationBarTitle(viewModel.people?.name ?? "", displayMode: .automatic)
+        .navigationBarItems(trailing: barButtons)
         .onAppear {
             viewModel.loadDetail(peopleId: peopleId)
         }
     }
     
+    private func isFanClub() -> Bool {
+        guard let _ = items.firstIndex(where: { $0.id == peopleId })  else {
+            return false
+        }
+        return true
+    }
     
+    private func addItem(_ people: People) {
+        withAnimation {
+            let newItem = FanClubPeople(context: viewContext)
+            newItem.timestamp = Date()
+            newItem.name = people.name
+            newItem.id = Int16(people.id)
+            newItem.imageURL = people.profile_path ?? ""
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+
+    private func deleteItems(_ people: People) {
+        withAnimation {
+            var offsets = IndexSet()
+            let index = items.firstIndex(where: { $0.id == people.id })
+            guard let i = index else { return }
+            offsets.insert(i)
+            offsets.map { items[$0] }.forEach(viewContext.delete)
+
+            do {
+                try viewContext.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
 }
 
 struct PeopleDetailHeaderRow: View {
@@ -102,9 +190,7 @@ struct PeopleDetailBiographyRow: View {
                     .lineLimit(1)
                 
                 Text(birthDate!)
-                    .foregroundColor(.secondary)
-                    .font(.body)
-                    .lineLimit(1)
+                    .singleLineBodyStyle()
             }
             
             if (deathDate?.isEmpty ?? true) == false {
@@ -113,9 +199,7 @@ struct PeopleDetailBiographyRow: View {
                     .lineLimit(1)
                 
                 Text(deathDate!)
-                    .foregroundColor(.secondary)
-                    .font(.body)
-                    .lineLimit(1)
+                    .singleLineBodyStyle()
             }
             
             if (placeOfBirth?.isEmpty ?? true) == false {
@@ -124,9 +208,7 @@ struct PeopleDetailBiographyRow: View {
                     .lineLimit(1)
                 
                 Text(placeOfBirth!)
-                    .foregroundColor(.secondary)
-                    .font(.body)
-                    .lineLimit(1)
+                    .singleLineBodyStyle()
             }
         }
         .padding(.vertical, 10)
