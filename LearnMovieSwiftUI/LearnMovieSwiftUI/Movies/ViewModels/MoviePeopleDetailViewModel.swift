@@ -12,6 +12,8 @@ class MoviePeopleDetailViewModel: ObservableObject {
     @Published var people: People?
     @Published var peopleCreditsResponse: PeopleCreditsResponse?
     @Published var profiles: [ImageData] = []
+    @Published var yearSections: [String: [Movie]] = [:]
+    @Published var yearSectionTitles: [String] = []
     
     let detailPublisher = PassthroughSubject<Int, Never>()
     let imagesPublisher = PassthroughSubject<Int, Never>()
@@ -55,7 +57,7 @@ class MoviePeopleDetailViewModel: ObservableObject {
         creditsPublisher
             .map { peopleId in
                 APIService.fetch(endpoint: APIService.Endpoint.personMovieCredits(person: peopleId),
-                                 params: nil)
+                                 params: ["language": "zh"])
             }
             .switchToLatest()
             .decode(type: PeopleCreditsResponse.self, decoder: JSONDecoder())
@@ -63,6 +65,7 @@ class MoviePeopleDetailViewModel: ObservableObject {
             .sink(receiveCompletion: { _ in
             }, receiveValue: { [weak self] someValue in
                 self?.peopleCreditsResponse = someValue
+                self?.mapCreditsToYears()
             })
             .store(in: &cancellables)
     }
@@ -71,6 +74,45 @@ class MoviePeopleDetailViewModel: ObservableObject {
         detailPublisher.send(peopleId)
         imagesPublisher.send(peopleId)
         creditsPublisher.send(peopleId)
+    }
+    
+    func mapCreditsToYears() {
+        var credits:[Movie] = []
+        
+        if let casts = self.peopleCreditsResponse?.cast, !casts.isEmpty {
+            credits.append(contentsOf: casts)
+        }
+        
+        if let crews = self.peopleCreditsResponse?.crew, !crews.isEmpty {
+            credits.append(contentsOf: crews)
+        }
+        
+        /// 这么做的目的是过滤重复的角色，比如同一个电影中担任多个角色，以演员为主
+        var creditDicts: [Int: Movie] = [:]
+        for credit in credits {
+            creditDicts.merge([credit.id: credit]) { (current, _) in current }
+        }
+        
+        var yearSections: [String: [Movie]] = [:]
+        
+        for (_, value) in creditDicts.enumerated() {
+            let movie = value.value
+            if let date = movie.release_date {
+                let year = String(date.prefix(4))
+                if yearSections[year] == nil {
+                    yearSections[year] = []
+                }
+                yearSections[year]?.append(movie)
+            } else {
+                if yearSections["即将上映"] == nil {
+                    yearSections["即将上映"] = []
+                }
+                yearSections["即将上映"]?.append(movie)
+            }
+        }
+        
+        self.yearSections = yearSections
+        self.yearSectionTitles = yearSections.compactMap { $0.key }.sorted(by: { $0 > $1})
     }
     
     deinit {

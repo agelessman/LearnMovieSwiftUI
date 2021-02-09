@@ -65,6 +65,18 @@ struct MoviePeopleDetailView: View {
         }
     }
     
+    @ViewBuilder private var creditsSections: some View {
+        ForEach(viewModel.yearSectionTitles, id: \.self) { year in
+            Section(header: Text(year)) {
+                ForEach(viewModel.yearSections[year]!) { movie in
+                    NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+                        MoviePeopleDetailMovieRow(movie: movie)
+                    }
+                }
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -73,6 +85,8 @@ struct MoviePeopleDetailView: View {
                     biographyRow
                     imagesRow
                 }
+                
+                creditsSections
             }
         }
         .navigationBarTitle(viewModel.people?.name ?? "", displayMode: .automatic)
@@ -94,7 +108,7 @@ struct MoviePeopleDetailView: View {
             let newItem = FanClubPeople(context: viewContext)
             newItem.timestamp = Date()
             newItem.name = people.name
-            newItem.id = Int16(people.id)
+            newItem.id = Int64(people.id)
             newItem.imageURL = people.profile_path ?? ""
 
             do {

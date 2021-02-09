@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B4DD56B25C8F10E00E1DBA2 /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4DD56A25C8F10E00E1DBA2 /* Cast.swift */; };
+		9B37E05C25D2817800E7F266 /* MoviePeopleDetailMovieRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B37E05B25D2817800E7F266 /* MoviePeopleDetailMovieRow.swift */; };
+		9B4DD56B25C8F10E00E1DBA2 /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4DD56A25C8F10E00E1DBA2 /* People.swift */; };
 		9B4DD56E25C8F31200E1DBA2 /* MovieDetailCrossLinePeopleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4DD56D25C8F31200E1DBA2 /* MovieDetailCrossLinePeopleRowView.swift */; };
 		9B4DD57125C8FC1800E1DBA2 /* MoviePeopleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4DD57025C8FC1800E1DBA2 /* MoviePeopleDetailView.swift */; };
 		9B650CAC25C0FF0A000FC0B5 /* MovieListMenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B650CAB25C0FF0A000FC0B5 /* MovieListMenuListView.swift */; };
@@ -68,7 +69,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B4DD56A25C8F10E00E1DBA2 /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		9B37E05B25D2817800E7F266 /* MoviePeopleDetailMovieRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePeopleDetailMovieRow.swift; sourceTree = "<group>"; };
+		9B4DD56A25C8F10E00E1DBA2 /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		9B4DD56D25C8F31200E1DBA2 /* MovieDetailCrossLinePeopleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCrossLinePeopleRowView.swift; sourceTree = "<group>"; };
 		9B4DD57025C8FC1800E1DBA2 /* MoviePeopleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePeopleDetailView.swift; sourceTree = "<group>"; };
 		9B650CAB25C0FF0A000FC0B5 /* MovieListMenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListMenuListView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				9B4DD56D25C8F31200E1DBA2 /* MovieDetailCrossLinePeopleRowView.swift */,
 				9B4DD57025C8FC1800E1DBA2 /* MoviePeopleDetailView.swift */,
 				9B83494325CFC62400A7531A /* MoviePeopleDetailImagesRow.swift */,
+				9B37E05B25D2817800E7F266 /* MoviePeopleDetailMovieRow.swift */,
 			);
 			path = MovieDetail;
 			sourceTree = "<group>";
@@ -305,7 +308,7 @@
 				9B87D8E725BA7B5D00360BB0 /* MovieGenre.swift */,
 				9B87D8F925BAC1D900360BB0 /* MovieSort.swift */,
 				9B97EF4A25C2A80F0036BE6D /* MovieReview.swift */,
-				9B4DD56A25C8F10E00E1DBA2 /* Cast.swift */,
+				9B4DD56A25C8F10E00E1DBA2 /* People.swift */,
 				9BDB3DDB25CB8F2C00B109CC /* MovieImage.swift */,
 			);
 			path = Models;
@@ -491,7 +494,7 @@
 				9B87D8E825BA7B5D00360BB0 /* MovieGenre.swift in Sources */,
 				9BA0969525C799F50083EA7F /* MovieDetailOverviewView.swift in Sources */,
 				9B87D8EC25BA7CE800360BB0 /* MovieListGenreView.swift in Sources */,
-				9B4DD56B25C8F10E00E1DBA2 /* Cast.swift in Sources */,
+				9B4DD56B25C8F10E00E1DBA2 /* People.swift in Sources */,
 				9B927CB025BFF5BE00177EE9 /* MovieListGridViewModel.swift in Sources */,
 				9B83494425CFC62400A7531A /* MoviePeopleDetailImagesRow.swift in Sources */,
 				9BA822B925B5682000A12F29 /* MovieDiscoverHomeView.swift in Sources */,
@@ -511,6 +514,7 @@
 				9B866E2F25B8006C003BC41D /* MovieListMenuSelector.swift in Sources */,
 				9BA0969825C7A0D20083EA7F /* MovieDetailKeywordView.swift in Sources */,
 				9B866E3225B83723003BC41D /* MovieListRow.swift in Sources */,
+				9B37E05C25D2817800E7F266 /* MoviePeopleDetailMovieRow.swift in Sources */,
 				9B4DD56E25C8F31200E1DBA2 /* MovieDetailCrossLinePeopleRowView.swift in Sources */,
 				9BDB3DD925CB8E7900B109CC /* MoviePeopleDetailViewModel.swift in Sources */,
 				9BA822B525B567A400A12F29 /* MovieListHomeView.swift in Sources */,

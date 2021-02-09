@@ -1,5 +1,5 @@
 //
-//  Cast.swift
+//  People.swift
 //  LearnMovieSwiftUI
 //
 //  Created by MC on 2021/2/2.
